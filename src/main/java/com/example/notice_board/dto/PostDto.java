@@ -14,7 +14,7 @@ public class PostDto {
     private String content;
 
     @NonNull
-    private String password;
+    private String password; //
 
 
     public String getTitle() {
