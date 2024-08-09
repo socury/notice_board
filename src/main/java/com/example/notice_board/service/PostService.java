@@ -25,4 +25,8 @@ public class PostService {
     public List<Post> getAllPosts() {
         return postDao.findAll();
     }
+
+    public void updatePost(Post post) {postDao.update(post);}
+
+    public void deletePost(Long id, String password) {postDao.delete(id, password);}
 }

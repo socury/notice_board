@@ -3,6 +3,8 @@ package com.example.notice_board.repository;
 import com.example.notice_board.domain.Post;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
@@ -56,5 +58,15 @@ public class PostDao {
                 return post;
             }
         }, id);
+    }
+
+    public void update(Post post) {
+        String sql = "UPDATE board_posts SET title = ?, content = ? WHERE id = ? AND password = ?";
+        jdbctemplate.update(sql, post.getTitle(), post.getContent(), post.getId(), post.getPassword());
+    }
+
+    public void delete(Long id, String password) {
+        String sql = "DELETE FROM board_posts WHERE id = ? AND password = ?";
+        jdbctemplate.update(sql, id, password);
     }
 }

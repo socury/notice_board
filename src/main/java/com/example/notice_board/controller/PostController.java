@@ -5,6 +5,7 @@ import com.example.notice_board.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,17 @@ public class PostController {
     @GetMapping //글 전체 조회
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
+    }
+
+    @PutMapping("/{id}")
+    public void updatePost(@PathVariable Long id, @RequestBody Post post) {
+        post.setId(BigInteger.valueOf(id));
+        postService.updatePost(post);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable Long id, @RequestParam String password) {
+        postService.deletePost(id, password);
     }
 }
 
